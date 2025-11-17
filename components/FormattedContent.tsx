@@ -98,17 +98,18 @@ export function FormattedContent({ content, className = '' }: FormattedContentPr
     <div className={className}>
       {formattedContent.map((part, index) => {
         if (part.type === 'code') {
+          const codePart = part as { type: 'code'; content: string; language?: string }
           return (
             <pre
               key={index}
               className="bg-gray-900 dark:bg-gray-800 text-gray-100 dark:text-gray-200 rounded-lg p-3 sm:p-4 my-2 sm:my-3 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed border border-gray-700 dark:border-gray-600 shadow-inner"
             >
-              {part.language && (
+              {codePart.language && (
                 <div className="text-xs text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-wide">
-                  {part.language}
+                  {codePart.language}
                 </div>
               )}
-              <code className="block whitespace-pre-wrap break-words">{part.content}</code>
+              <code className="block whitespace-pre-wrap break-words">{codePart.content}</code>
             </pre>
           )
         } else if (part.type === 'inline-code') {
